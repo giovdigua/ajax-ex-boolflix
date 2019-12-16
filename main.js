@@ -20,6 +20,7 @@ $(document).ready( function () {
                 console.log(response);
                 //Variable that contains tha array of films
                 var films = response.results;
+                console.log(films);
                 if (films.length === 0) {
                     var emptyList = 'NO RESULT!'
                     $('#films').append(`<h1 id="noResult">${emptyList}</h1>`);
@@ -52,7 +53,7 @@ $(document).ready( function () {
                     $('#films').append(`<li>Film nr° ${filmItem}<ul>
                         <li>Titolo: ${title}</li>
                         <li>Titolo originale: ${originalTitle}</li>
-                        <li>Lingua: ${language}</li>
+                        <li>Lingua: ${language} <img  src="flags/${language==='en'?'gb':language}.png" alt="language flag "></li>
                         <li>Giudizio: ${giudice()}</li>
                         </ul></li><br>`);
                     console.log(films[i].title);
@@ -65,6 +66,20 @@ $(document).ready( function () {
             }
         });
     });
+    // $.ajax({
+    //         url: 'src/world.json',
+    //         method:'GET',
+    //         success:function (response) {
+    //             console.log(response);
+    //             for (var i = 0; i < response.length; i++) {
+    //                 console.log(response[i].alpha2);
+    //             }
+    //
+    //         },
+    //         error:function(err) {
+    //             console.log(err);
+    //         }
+    //     });
 
 
 
