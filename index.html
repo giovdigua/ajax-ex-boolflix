@@ -8,20 +8,37 @@
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="main.js" charset="utf-8"></script>
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>ajax-ex-boolflix</title>
 </head>
 <body>
-    <header>
-        <input id="searchBar" type="text" name="search" value="">
-        <button id="searchButton" type="button" name="button">Cerca</button>
-    </header>
-    <main>
 
-        <ol id="films">
+        <nav class="navbar navbar-dark bg-dark fixed-top">
+              <a class="navbar-brand red">BOOLFIX</a>
+              <form class="form-inline col-4">
+                <input id="searchBar" class="form-control col-10" type="text" placeholder="Search your movie or serial" aria-label="Search">
+                <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+              </form>
+        </nav>
+        <div id="films"class="container-fluid">
 
-        </ol>
-    </main>
+        </div>
+
+        <script id="card-template" type="text/x-handlebars-template">
+            <div class="card" style="width: 25rem;">
+                <img src="{{posterIMG}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{filmTitle}}</h5>
+                    
+                        <p class="votes">{{{vote}}}</p>
+
+                    <p class="card-text">{{plot}}</p>
+
+                </div>
+            </div>
+
+        </script>
 
 </body>
 </html>
