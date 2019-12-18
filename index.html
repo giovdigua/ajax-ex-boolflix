@@ -16,22 +16,36 @@
 
         <nav class="navbar navbar-dark bg-dark fixed-top">
               <a class="navbar-brand red">BOOLFIX</a>
-              <form class="form-inline col-4">
+              <div class="form-inline col-4">
                 <input id="searchBar" class="form-control col-10" type="text" placeholder="Search your movie or serial" aria-label="Search">
                 <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
-              </form>
+            </div>
         </nav>
-        <div id="films"class="container-fluid">
+        <div id="spacer">  </div>
+        <section id="filmsection" class="container-fluid">
+            <h1 class="sectionTitle">Films</h1>
+            <div id="films"class="container">
 
-        </div>
+            </div>
+        </section>
+        <section id="serieSection" class="container-fluid">
+            <h1 class="sectionTitle">Series</h1>
+            <div id="series" class="container">
 
+            </div>
+        </section>
         <script id="card-template" type="text/x-handlebars-template">
-            <div class="card" style="width: 25rem;">
+            <div class="card" style="width: 22rem;">
+                <div class="overlapp">
+
+                </div>
                 <img src="{{posterIMG}}" class="card-img-top" alt="...">
                 <div class="card-body">
+
                     <h5 class="card-title">{{filmTitle}}</h5>
-                    
-                        <p class="votes">{{{vote}}}</p>
+
+                        <p class="votes">{{rate}} {{{vote}}}</p>
+                        <p class="flags">Original language: <img  src="flags/{{lang}}.png" alt="language flag "></p>
 
                     <p class="card-text">{{plot}}</p>
 

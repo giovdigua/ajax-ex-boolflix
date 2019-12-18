@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background-color: black;
+}
 
 a.navbar-brand.red{
     color: red;
@@ -13,23 +16,59 @@ a.navbar-brand.red:hover{
     color: red;
     cursor: pointer;
 }
+#spacer{
+    height: 80px;
+}
+
+h1.sectionTitle{
+    color: red;
+    text-align: center;
+    margin-top: 100px;
+
+}
 
 
 .warning::placeholder{
     color: red;
 }
-#films{
-    margin-top: 100px;
+#serieSection, #filmsection {
+
+    border-bottom: 10px solid #343a40;
+}
+.containr{
+    width: 85%;
+}
+.noResult{
+    color: rgba(255, 0, 0, 0.5);
+}
+#films,#series{
+
+    margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 .card{
-    margin: 20px 0;
+    margin: 20px 5px;
+    position: relative;
+}
+.card-body{
+    background-color: rgba(0, 0, 0, 0.0);
+    color: white;
+    z-index: 15;
+}
+.overlapp{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.055059523809523836) 0%, rgba(0,0,0,1) 65%);
 }
 
 img.card-img-top{
-    height: 450px
+    height: 350px
 }
 
 div.votesContainer{
@@ -39,4 +78,8 @@ p.votes{
 
     text-align: center;
 
+}
+p.card-text{
+    height: 150px;
+    overflow: scroll;
 }
