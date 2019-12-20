@@ -35,7 +35,7 @@
             </div>
         </section>
         <script id="card-template" type="text/x-handlebars-template">
-            <div class="card" style="width: 22rem;">
+            <div data-id="{{data_id}}" class="card" style="width: 22rem;">
                 <div class="overlapp">
 
                 </div>
@@ -48,6 +48,11 @@
                         <p class="flags">Original language: <img  src="flags/{{lang}}.png" alt="language flag "></p>
 
                     <p class="card-text">{{plot}}</p>
+                    <div class="cast">
+                        <ul>
+
+                        </ul>
+                    </div>
 
                 </div>
             </div>

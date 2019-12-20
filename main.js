@@ -2,11 +2,11 @@ $(document).ready( function () {
 
     var templateCardHtml = $('#card-template').html();
     var templateCardCompiled = Handlebars.compile(templateCardHtml);
-    var apiBase = 'https://api.themoviedb.org/3/search';
+    var apiBase = 'https://api.themoviedb.org/3';
     var apiKey = '80ffe5b2b9aa99cf4d91d9de1be5363d';
-    var searchMovie = '/movie/';
-    var searchSerie = '/tv/';
-    var posterPrefixPath = 'https://image.tmdb.org/t/p/w185';
+    var searchMovie = '/search/movie/';
+    var searchSerie = '/search/tv/';
+    var posterPrefixPath = 'https://image.tmdb.org/t/p/w342';
 
 
 
@@ -15,7 +15,7 @@ $(document).ready( function () {
         if(event.which == 13) {
             search();
         }
-        console.log(event.which);
+
 
     });
 
@@ -32,7 +32,6 @@ $(document).ready( function () {
         $('#searchBar').removeClass('warning');
         //create a variable to which I assign the value coming from the searchBar
         var query = $('#searchBar').val();
-        console.log(query);
         if (query) {
             //Empty the list by returning the empty div films
             $('#films').empty();
@@ -42,8 +41,8 @@ $(document).ready( function () {
             $('#searchBar').val('');
             $('#searchBar').attr('placeholder','Search your movie or serial');
             //AJAX calls
-            getAPI(searchMovie,query);
-            getAPI(searchSerie,query);
+            getAPISearch(searchMovie,query);
+            getAPISearch(searchSerie,query);
         } else {
             var text = $('#searchBar').addClass('warning');
             text.attr('placeholder','THE QUERY CANNOT BE EMPTY');
@@ -53,7 +52,7 @@ $(document).ready( function () {
 
 
     //This function call the api using a ajax call,parametre is the query of search
-    function getAPI(typeSearch,query) {
+    function getAPISearch(typeSearch,query) {
         $.ajax({
             url: apiBase + typeSearch,
             method:'GET',
@@ -65,7 +64,7 @@ $(document).ready( function () {
 
                 //Variable that contains tha array of films
                 var films = response.results;
-                console.log(films);
+
                 if (films.length === 0) {
                     if (typeSearch == searchMovie) {
                         $('#films').append(`<h1 class="noResult">'NO MOVIES found for your query!'</h1>`);
@@ -86,7 +85,6 @@ $(document).ready( function () {
     }
     //This funcyion print the result on the page
     function getResults(results) {
-        console.log(results);
         for (var i = 0; i < results.length; i++) {
             var result = results[i];
             var title;
@@ -109,13 +107,13 @@ $(document).ready( function () {
             poster = result.poster_path === null ?'imgPlaceholder.jpg': posterPrefixPath+result.poster_path;
             var overview = result.overview === ''?'NO OVERVIEW':result.overview;
             var lang = result.original_language;
-            console.log(lang);
             lang = lang === 'en'?'gb':lang;
             lang = lang === 'ja'?'jp':lang;
-            console.log(lang+'post');
             var vote = result.vote_average;
             var stars = vote/2 //Math.round(vote/2);
             var giudice = rating(stars);
+            var id = result.id;
+
 
             var films = {
                 posterIMG: poster,
@@ -123,9 +121,12 @@ $(document).ready( function () {
                 plot: overview,
                 rate:stars,
                 vote:giudice,
-                lang: lang
+                lang: lang,
+                data_id:id
             }
-            container.append(templateCardCompiled(films));
+            var actualCard = templateCardCompiled(films)
+             container.append(actualCard);
+
 
                 // `<li>Film nr° ${filmItem}<ul>
                 // <li>Titolo: ${title}</li>
@@ -134,6 +135,37 @@ $(document).ready( function () {
                 // <li>Lingua: ${language} <img  src="flags/${language==='en'?'gb':language}.png" alt="language flag "></li>
                 // <li>Giudizio: ${giudice}</li>
                 // </ul></li><br>`);
+             $.ajax({
+                 url: apiBase + `/movie/${id}`,
+                 method:'GET',
+                 data:{
+                     api_key:apiKey,
+                     append_to_response:'credits'
+
+
+                 },
+                 success:function (response) {
+                     var idFilm = response.id;
+                     var actors = response.credits.cast;
+                     var listHTML = '';
+                     var conteneirList = $(`.card[data-id="${idFilm}"] .cast ul`);
+                     console.log(conteneirList);
+                     for (var i = 0; i < actors.length; i++) {
+                         var character =  actors[i].character;
+                         var actorName = actors[i].name;
+                         listHTML+= `<li>Character: ${character} Actor: ${actorName}</li>`;
+                         if (i > 3) {
+                                break;
+                         }
+
+                     }
+                     conteneirList.append(listHTML);
+
+                 },
+                 error:function(err) {
+                     console.log(err);
+                 }
+             });
 
         }
     }
