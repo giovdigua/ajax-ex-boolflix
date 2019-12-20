@@ -90,7 +90,8 @@ $(document).ready( function () {
             var title;
             var originalTitle;
             var container;
-            var poster
+            var poster;
+            var h2Visible = '';
             if (result.hasOwnProperty('title')) {
                  title = result.title;
                  container = $('#films');
@@ -104,7 +105,8 @@ $(document).ready( function () {
                  originalTitle = result.original_title;
             }
 
-            poster = result.poster_path === null ?'imgPlaceholder.jpg': posterPrefixPath+result.poster_path;
+            poster = result.poster_path === null ? 'imgPlaceholder.jpg': posterPrefixPath+result.poster_path;
+            h2Visible = result.poster_path === null ? h2Visible = 'visible': h2Visible = '';
             var overview = result.overview === ''?'NO OVERVIEW':result.overview;
             var lang = result.original_language;
             lang = lang === 'en'?'gb':lang;
@@ -117,6 +119,7 @@ $(document).ready( function () {
 
             var films = {
                 posterIMG: poster,
+                visible: h2Visible,
                 filmTitle: title,
                 plot: overview,
                 rate:stars,
@@ -135,37 +138,38 @@ $(document).ready( function () {
                 // <li>Lingua: ${language} <img  src="flags/${language==='en'?'gb':language}.png" alt="language flag "></li>
                 // <li>Giudizio: ${giudice}</li>
                 // </ul></li><br>`);
-             $.ajax({
-                 url: apiBase + `/movie/${id}`,
-                 method:'GET',
-                 data:{
-                     api_key:apiKey,
-                     append_to_response:'credits'
-
-
-                 },
-                 success:function (response) {
-                     var idFilm = response.id;
-                     var actors = response.credits.cast;
-                     var listHTML = '';
-                     var conteneirList = $(`.card[data-id="${idFilm}"] .cast ul`);
-                     console.log(conteneirList);
-                     for (var i = 0; i < actors.length; i++) {
-                         var character =  actors[i].character;
-                         var actorName = actors[i].name;
-                         listHTML+= `<li>Character: ${character} Actor: ${actorName}</li>`;
-                         if (i > 3) {
-                                break;
-                         }
-
-                     }
-                     conteneirList.append(listHTML);
-
-                 },
-                 error:function(err) {
-                     console.log(err);
-                 }
-             });
+                //first soluction to list cast NOT adopted
+             // $.ajax({
+             //     url: apiBase + `/movie/${id}`,
+             //     method:'GET',
+             //     data:{
+             //         api_key:apiKey,
+             //         append_to_response:'credits'
+             //
+             //
+             //     },
+             //     success:function (response) {
+             //         var idFilm = response.id;
+             //         var actors = response.credits.cast;
+             //         var listHTML = '';
+             //         var conteneirList = $(`.card[data-id="${idFilm}"] .cast ul`);
+             //         console.log(conteneirList);
+             //         for (var i = 0; i < actors.length; i++) {
+             //             var character =  actors[i].character;
+             //             var actorName = actors[i].name;
+             //             listHTML+= `<li>Character: ${character} Actor: ${actorName}</li>`;
+             //             if (i > 3) {
+             //                    break;
+             //             }
+             //
+             //         }
+             //         conteneirList.append(listHTML);
+             //
+             //     },
+             //     error:function(err) {
+             //         console.log(err);
+             //     }
+             // });
 
         }
     }

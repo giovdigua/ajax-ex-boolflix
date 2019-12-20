@@ -48,14 +48,103 @@ h1.sectionTitle{
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.card{
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+  margin: 20px;
+  border: 1px solid rgba(0,0,0,0.8);
+  box-shadow: 0px 0px 20px -5px rgba(255,0,0,1);
+
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 1.6s;
+  transform-style: preserve-3d;
+
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+
+}
+
+.flip-card-front h2{
+  color: rgba(255,0,0,0.7);
+  font-size: 1.5em;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 50%;
+  right:15%;
+  transform: perspective(500px) translateZ(50px);
+  display: none;
+}
+.flip-card-front h2.visible{
+    display: block;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+
+}
+/* .card{
     margin: 20px 5px;
     position: relative;
+    width: 300px;
+   height: 400px;
+   transform-style: preserve-3d;
 }
-.card-body{
+.card .face{
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   transform-style: preserve-3d;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   backface-visibility: hidden;
+   transition: 1s ease-in-out;
+   transform: perspective(500px) rotateY(0deg);
+}
+.card:hover .face.front{
+      transform: perspective(500px) rotateY(180deg);
+ }
+.card:hover .face.back{
+      transform: perspective(500px) rotateY(360deg);
+ }
+
+ .card .face h2{
+     color: white;
+   font-size: 4em;
+   text-transform: uppercase;
+   transform: perspective(500px) translateZ(50px);
+} */
+
+/* .card-body{
     background-color: rgba(0, 0, 0, 0.0);
-    color: white;
-    z-index: 15;
+    color: black;
+
 }
 .overlapp{
     position: absolute;
@@ -67,7 +156,7 @@ h1.sectionTitle{
     background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.055059523809523836) 0%, rgba(0,0,0,1) 65%);
 }
 
-img.card-img-top{
+/* img.card-img-top{
     height: 350px
 }
 
@@ -82,4 +171,4 @@ p.votes{
 p.card-text{
     height: 150px;
     overflow: scroll;
-}
+} */ */

@@ -35,29 +35,48 @@
             </div>
         </section>
         <script id="card-template" type="text/x-handlebars-template">
-            <div data-id="{{data_id}}" class="card" style="width: 22rem;">
-                <div class="overlapp">
-
-                </div>
-                <img src="{{posterIMG}}" class="card-img-top" alt="...">
-                <div class="card-body">
-
-                    <h5 class="card-title">{{filmTitle}}</h5>
-
-                        <p class="votes">{{rate}} {{{vote}}}</p>
-                        <p class="flags">Original language: <img  src="flags/{{lang}}.png" alt="language flag "></p>
-
-                    <p class="card-text">{{plot}}</p>
-                    <div class="cast">
-                        <ul>
-
-                        </ul>
+            <div data-id="{{data_id}}" class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <img src="{{posterIMG}}" alt="Avatar" style="width:300px;height:400px;">
+                      <h2 class="{{visible}}">{{filmTitle}}</h2>
                     </div>
-
-                </div>
+                    <div class="flip-card-back">
+                        <div class="card-body">
+                            <h5 class="card-title">{{filmTitle}}</h5>
+                            <p class="votes">{{rate}} {{{vote}}}</p>
+                            <p class="flags">Original language: <img  src="flags/{{lang}}.png" alt="language flag "></p>
+                            <p class="card-text">{{plot}}</p>
+                        </div>
+                    </div>
+              </div>
             </div>
 
         </script>
 
 </body>
+<!-- <div class="face front">
+    <!-- <div class="overlapp">
+
+    </div>
+    <img src="{{posterIMG}}" class="card-img-top" alt="...">
+    <h2>{{filmTitle}}</h2>
+</div> -->
+<!-- <div class="face back">
+    <div class="card-body">
+
+        <h5 class="card-title">{{filmTitle}}</h5>
+
+            <p class="votes">{{rate}} {{{vote}}}</p>
+            <p class="flags">Original language: <img  src="flags/{{lang}}.png" alt="language flag "></p>
+
+        <p class="card-text">{{plot}}</p>
+    </div>
+</div> -->
+<!-- <div class="cast">
+    <ul>
+
+    </ul>
+</div> -->
+
 </html>
